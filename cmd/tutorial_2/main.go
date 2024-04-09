@@ -27,4 +27,12 @@ func main() {
 	var1 = 44
 	// pi = "new value" // This will cause an error because constants are immutable
 	fmt.Println(var1, pi)
+
+	// Functions
+
+	printMe()
+}
+
+func printMe() {
+	fmt.Println("Hello from printMe()!")
 }
