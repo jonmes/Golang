@@ -21,13 +21,22 @@ func main() {
 
 	// switch statement
 
+	switch {
+	case err != nil:
+		fmt.Printf(err.Error())
+	case remainder == 0:
+		fmt.Printf("The result of the integer division is %d\n", result)
+	default:
+		fmt.Printf("result: %v, remainder: %d\n", result, remainder)
+	}
+
 	switch remainder {
 	case 0:
-		fmt.Printf(err.Error())
-	case 1, 2:
-		fmt.Printf("The result of the integration division is %d\n", result)
+		fmt.Printf("result: %v, remainder: %d\n", result, remainder)
+	case 1, 2, 3, 4, 5, 6:
+		fmt.Printf("The result of the integration division is %d", result)
 	default:
-		fmt.Printf("result: %v, remainder: %v\n", result, remainder)
+		fmt.Printf("show error, %v\n", err.Error())
 	}
 }
 
