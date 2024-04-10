@@ -23,7 +23,7 @@ func main() {
 
 	switch {
 	case err != nil:
-		fmt.Printf(err.Error())
+		fmt.Printf("Error: %v\n", err.Error())
 	case remainder == 0:
 		fmt.Printf("The result of the integer division is %d\n", result)
 	default:
