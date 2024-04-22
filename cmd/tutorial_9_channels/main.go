@@ -1,27 +1,53 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"math/rand"
+	"time"
+)
 
 // Declare a channel to store data fetched from the database
-// var results = make(chan string)
+var MAX_CHICKEN_PRICE float32 = 10
 
 func main() {
 	// Declare a channel to store data fetched from the database
-	var c = make(chan int)
+	// var c = make(chan int)
 
-	go process(c)
+	// go process(c)
 
-	// var i = <- c
-	for j := range c {
-		fmt.Println(j)
+	// This is a synchronous operation that will block the main goroutine until the channel is closed.
+	// This loop will run until the channel is closed
+	// for j := range c {
+	// 	fmt.Println(j)
+	// }
+
+	var chickenChannel = make(chan string)
+	var websites = []string{"walmart.com", "costco.com", "wholefoods.com"}
+	for i := range websites {
+		go checkChickenPrices(websites[i], chickenChannel)
 	}
+	sendMessage(chickenChannel)
 
 }
 
-func process(c chan int) {
-	for i := 0; i < 5; i++ {
-		// fmt.Println(i)
-		c <- i
+// func process(c chan int) {
+// 	for i := 0; i < 50000; i++ {
+// 		c <- i
+// 	}
+// 	defer close(c)
+// }
+
+func checkChickenPrices(website string, chickenChannel chan string) {
+	for {
+		time.Sleep(time.Second * 3)
+		var chickenPrice = rand.Float32() * 20
+		if chickenPrice <= MAX_CHICKEN_PRICE {
+			chickenChannel <- website
+			break
+		}
 	}
-	defer close(c)
+}
+
+func sendMessage(chickenChannel chan string) {
+	fmt.Printf("The chicken is available at %s\n", <-chickenChannel)
 }
